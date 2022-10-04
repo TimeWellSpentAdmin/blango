@@ -3,6 +3,9 @@ from django.utils import timezone
 from blog.models import Post
 from django.shortcuts import redirect
 from blog.forms import CommentForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     posts = Post.objects.filter(published_at__lte=timezone.now())
@@ -20,6 +23,7 @@ def post_detail(request, slug):
                 comment.content_object = post
                 comment.creator = request.user
                 comment.save()
+                logger.debug("Created comment for %s", request.user)
                 return redirect(request.path_info)
         else:
             comment_form = CommentForm()
