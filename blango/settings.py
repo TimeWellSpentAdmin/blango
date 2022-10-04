@@ -83,9 +83,9 @@ class Dev(Configuration):
         "ALTERNATIVE_DATABASE_URL",
         default=f"sqlite:///{BASE_DIR}/alternative_db.sqlite3",
     ),
-}
-
-LOGGING = {
+    }
+    
+  LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
@@ -102,7 +102,7 @@ LOGGING = {
         "handlers": ["console"],
         "level": "DEBUG",
     }
-}
+  }
 
 
   # Password validation
@@ -121,6 +121,13 @@ LOGGING = {
       {
           'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
       },
+  ]
+
+  PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
   ]
 
 
